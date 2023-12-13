@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useCallback, useEffect, useState } from "react";
@@ -26,21 +27,24 @@ const Form = () => {
     Object.keys(data).forEach((k) => {
       formData.append(k, data[k]);
     });
+    if (file) {
+      formData.append("file", file);
+    }
+    console.log(formData);
     return formData;
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const data = { "form-name": "contact", name, email, phone, message, file };
-
+    const data = { "form-name": "contact", name, email, phone, message };
     console.log(data);
+
     fetch("/", {
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data; boundary=random" },
+      // headers: { "Content-Type": "multipart/form-data; boundary=random" },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode(data),
-    })
-      .then(() => setStatus("Enviado"))
-      .catch((error) => console.log(error));
+    });
   };
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
@@ -73,7 +77,9 @@ const Form = () => {
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
         name="contact"
+        method="POST"
         className="flex flex-col h-full"
+        encType="application/x-www-form-urlencoded"
       >
         {" "}
         <h4 className="text-[#494949] pt-7 pb-4 font-body text-xl">
@@ -82,6 +88,7 @@ const Form = () => {
         </h4>
         <div className="flex gap-4 items-start">
           <div className="relative float-label-input">
+            <input type="hidden" name="form-name" value="contact" />
             <input
               type="text"
               id="name"
@@ -142,7 +149,7 @@ const Form = () => {
           className="relative border-2 border-[#A7A7A7] h-[100px] max-w-[400px] w-full border-dashed flex items-center justify-center"
           {...getRootProps()}
         >
-          <input {...getInputProps()} type="file" />
+          <input {...getInputProps()} type="file" name="file" />
           {!isDragActive && !file ? (
             <p className="text-[#A7A7A7] text-sm">
               Arraste o documento aqui ou faça download
