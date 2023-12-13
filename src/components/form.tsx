@@ -22,7 +22,8 @@ const Form = () => {
     return formData;
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const data = { "form-name": "contact", name, email, message, file };
 
     fetch("/", {
@@ -32,8 +33,6 @@ const Form = () => {
     })
       .then(() => setStatus("Form Submission Successful!!"))
       .catch((error) => setStatus("Form Submission Failed!"));
-
-    e.preventDefault();
   };
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
@@ -50,14 +49,15 @@ const Form = () => {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit} action="/thank-you/">
+    <div className="">
+      <form data-netlify="true" onSubmit={handleSubmit} action="/thank-you/">
         <p>
           <label>
             Your Name:{" "}
             <input
               type="text"
               name="name"
+              className="text-red-400"
               value={name}
               onChange={handleChange}
             />
@@ -69,6 +69,7 @@ const Form = () => {
             <input
               type="email"
               name="email"
+              className="text-red-400"
               value={email}
               onChange={handleChange}
             />
@@ -77,7 +78,12 @@ const Form = () => {
         <p>
           <label>
             Message:{" "}
-            <textarea name="message" value={message} onChange={handleChange} />
+            <textarea
+              name="message"
+              value={message}
+              onChange={handleChange}
+              className="text-red-400"
+            />
           </label>
         </p>
         <div {...getRootProps()}>
