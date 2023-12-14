@@ -188,16 +188,16 @@ const Form = () => {
             <p className="text-white text-5xl h-[110%] block">+</p>
           </button>
         </div>
-        <p className="max-w-2xl flex items-start justify-center mt-6 gap-3">
+        <p className="max-w-2xl flex items-start mt-6 gap-3">
           <input type="checkbox" />
-          <small className="font-body text-xs leading-none ">
+          <small className="font-body text-xs leading-none max-w-[500px] text-[#494949]">
             Eu permito que a Brock processe meus dados de acordo com a Política
             de Privacidade, usando-os para atender minha solicitação de produtos
             e serviços.*
           </small>
         </p>
         <button
-          className="mt-10 h-full font-body font-bold text-lg lg:text-2xl max-w-[400px] text-white px-6 py-6 rounded-[10px] max-h-[74px] w-full bg-[#3F5C9A]"
+          className="mt-10 h-full font-body font-bold text-lg lg:text-2xl max-w-[400px] text-white px-6 py-6 rounded-[10px] min-h-[74px] w-full bg-[#3F5C9A]"
           type="submit"
         >
           Enviar proposta de negócio
