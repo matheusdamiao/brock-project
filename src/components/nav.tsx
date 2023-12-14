@@ -61,7 +61,7 @@ const Nav = () => {
         </div>
         <ul
           className={`lg:w-[50%] top-24 z-[99] h-96 flex flex-col bg-white  transition-opacity w-full left-0 items-center justify-evenly  absolute ${
-            isOpen === true && "opacity-75"
+            isOpen === true && "opacity-90"
           }
             ${isOpen === false && "hidden"}
           } `}

@@ -2,10 +2,11 @@
 import Form from "@/components/form";
 import Nav from "@/components/nav";
 import bg from "./../../public/bg.webp";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col">
+    <main className="w-full flex flex-col bg-white">
       <Nav />
       <section className="w-full h-[600px] relative bg-white flex flex-col items-start justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,6 +27,7 @@ export default function Home() {
       <section className="flex flex-col bg-white">
         <Form />
       </section>
+      <Footer />
     </main>
   );
 }
