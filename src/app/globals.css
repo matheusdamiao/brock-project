@@ -12,6 +12,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -20,7 +21,7 @@
   }
 }
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -28,7 +29,11 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+html{
+  scroll-behavior: smooth;
 }
+
 
 .float-label-input {
   margin: 32px 0;     
@@ -45,3 +50,32 @@ body {
   background-color: white;
 }
 
+.bgTransparent {
+  background-color: transparent;
+}
+
+.animatedBg {
+	background: linear-gradient(-45deg, #111726, #3C5086, #3E434F, #E1E7F9);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100svh;
+}
+
+@media screen and (max-width: 800px){
+  .animatedBg {
+    height: 90svh;
+  }
+}
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

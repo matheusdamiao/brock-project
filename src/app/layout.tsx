@@ -1,8 +1,12 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Metadata } from "next";
+import localFont from "next/font/local";
+import ToastProvider from "@/components/ToastProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({
+  src: "./GacorPersonalUse.otf",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://brock-investment.netlify.app/"),
@@ -22,7 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={myFont.className}>
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }
