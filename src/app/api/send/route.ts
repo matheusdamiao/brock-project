@@ -3,6 +3,8 @@ import { NextRequest } from "next/server";
 import { Resend } from "resend";
 import { File } from "buffer";
 import { NewLeadTemplate } from "@/components/newLeadTemplate";
+import WelcomeEmail from "@/emails/welcome";
+import NewLead from "@/emails/newLead";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 
@@ -39,7 +41,8 @@ const file = f as unknown as File;
       from: 'Brock Investments  <contato@matheusdamiao.com.br>',
       to: [`${email}`],
       subject: 'Recebemos sua proposta',
-      react: WelcomeTemplate({ nome: `${name}` }) as React.ReactElement,
+      // react: WelcomeTemplate({ nome: `${name}` }) as React.ReactElement,
+      react: WelcomeEmail({name: `${name}`}) as React.ReactElement
     });
     console.log('data do resend', resendData);
 
@@ -58,12 +61,16 @@ const file = f as unknown as File;
         //     }
         //   ],
         attachments: attachment ? [attachment] : undefined,
-        react: NewLeadTemplate({
-          nome: `${name}`,
-          email: `${email}`,
-          telefone: `${phone}`,
-          mensagem: `${message}`,
-        }) as React.ReactElement,
+        // react: NewLeadTemplate({
+        //   nome: `${name}`,
+        //   email: `${email}`,
+        //   telefone: `${phone}`,
+        //   mensagem: `${message}`,
+        // }) as React.ReactElement,
+        react: NewLead({nome: `${name}`,
+         email: `${email}`,
+         telefone: `${phone}`,
+         mensagem: `${message}`,}) as React.ReactElement
       });
 
     return new Response(

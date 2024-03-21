@@ -66,7 +66,7 @@ const Form = () => {
         isLoading: false,
       });
 
-      toast.success("Mensagem enviada!", {
+      toast.success("Mensagem enviada! Obrigado!", {
         autoClose: 3000,
       });
 
