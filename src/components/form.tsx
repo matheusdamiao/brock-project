@@ -7,8 +7,14 @@ import { useDropzone } from "react-dropzone";
 import pdfIcon from "./../../public/pdf.svg";
 import pptIcon from "./../../public/ppt.svg";
 import docIcon from "./../../public/doc.svg";
+import { toast } from "react-toastify";
+import { createClient } from "@/utils/supabase/client";
+import { removeDiacritics } from "@/utils/removeDiacritics";
 
-import { ToastContent, toast } from "react-toastify";
+interface SupabaseUploadResponse {
+  data: { path: string; fullPath: string } | null;
+  error: any | null;
+}
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -19,6 +25,7 @@ const Form = () => {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const supabase = createClient();
 
   const onDrop = useCallback(
     (acceptedFiles: React.SetStateAction<File | null>[]) => {
@@ -49,7 +56,25 @@ const Form = () => {
         toastId = toast.loading("Anexando seu arquivo. Aguarde", {
           autoClose: false,
         });
-        formData.append("file", file);
+
+        const cleanedFileName = removeDiacritics(file.name);
+        const bucket = "brock/propostas";
+        const data = await supabase.storage
+          .from(bucket)
+          .upload(cleanedFileName, file);
+
+        const castedResponse = data as SupabaseUploadResponse;
+
+        // console.log("olha a informação aí", castedResponse);
+        formData.append(
+          "file",
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${castedResponse.data.fullPath}`
+        );
+
+        formData.append("fileName", cleanedFileName);
+
+        // console.log("olha o path todo aí", formData.get("file"));
+        // console.log("olha o nome  aí", formData.get("fileName"));
       }
 
       const res = await fetch("/api/send", {
@@ -181,7 +206,11 @@ const Form = () => {
             Mensagem
           </label>
         </p>
-        <h4 className="pb-5 text-[#494949]">Apresentação:</h4>
+        <h4 className="pb-0 text-[#494949]">Apresentação*:</h4>
+        <small className="text-[#888888] pb-4">
+          *Envie arquivos com extensões .pdf, .ppt ou .doc e tamanho não
+          superior a <b>28MB</b>.
+        </small>
         <div
           className="relative border-2 rounded-md border-[#A7A7A7] h-[150px] cursor-pointer  w-full border-dashed flex items-center justify-center"
           {...getRootProps()}
