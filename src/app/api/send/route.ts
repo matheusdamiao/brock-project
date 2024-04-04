@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
   const resendData = await resend.emails.send({
       from: 'Brock Investments  <contato@matheusdamiao.com.br>',
       to: [`${email}`],
+      bcc:['otto.baumgart@grupobaumgart.com.br'],
       subject: 'Recebemos sua proposta',
       // react: WelcomeTemplate({ nome: `${name}` }) as React.ReactElement,
       react: WelcomeEmail({name: `${name}`}) as React.ReactElement,
@@ -58,8 +59,8 @@ export async function POST(request: NextRequest) {
 
     const newLeadResponse = await resend.emails.send({
         from: 'Novo Lead do site <contato@matheusdamiao.com.br>',
-        to: ['matheus.damiaoliveira@gmail.com'],
-        bcc: ['matheus.damiaoliveira@gmail.com'],
+        to: ['otto.baumgart@grupobaumgart.com.br'],
+        bcc: ['matheus.damiaoliveira@gmail.com', ],
         subject: 'Novo lead no site',
         // attachments: [ 
         //     {

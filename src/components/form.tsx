@@ -133,7 +133,7 @@ const Form = () => {
       className="text-black max-w-7xl m-auto px-6 lg:px-0 py-10 lg:py-[120px] w-full "
     >
       <h3 className="lg:text-4xl text-3xl text-[#3C5086] font-body font-bold text-center">
-        Vamos fazer seu negócio evoluir?
+        Torne-se um parceiro
       </h3>
       <form
         onSubmit={handleSubmit}
@@ -143,8 +143,9 @@ const Form = () => {
         {" "}
         <h4 className="text-[#7A7A7A] pt-6 lg:pb-16 pb-10 text-center font-body lg:text-lg text-base">
           {" "}
-          Preencha abaixo com suas informações. Caso você tenha uma apresentação
-          da sua empresa, não deixe de anexá-la também. Boa sorte!
+          Se sua empresa compartilha dos nossos pré-requisitos para
+          investimento, envie-nos uma apresentação contando sobre como vocês se
+          destacam no mercado e por que o futuro é ainda mais promissor.
         </h4>
         <div className="flex gap-4 items-start lg:flex-nowrap flex-wrap flex-col lg:flex-row">
           <p className="relative float-label-input !m-0 w-full lg:max-w-[200px] ">
