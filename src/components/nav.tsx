@@ -41,7 +41,7 @@ const Nav = () => {
         </ul>
         {/* mobile */}
         <div
-          className={`lg:hidden block cursor-pointer px-4 py-4 `}
+          className={`lg:hidden block cursor-pointer px-4 py-4 z-[9999] `}
           onClick={() => setIsOpen(!isOpen)}
         >
           <span
@@ -52,10 +52,13 @@ const Nav = () => {
           ></span>
         </div>
         <ul
-          className={`lg:w-[50%] top-24 z-[99] h-96 flex flex-col bg-white  transition-opacity w-full left-0 items-center justify-evenly  absolute ${
-            isOpen === true && "opacity-90"
+          className={`lg:w-[50%] w-full z-[99] h-[150px] top-20 absolute flex flex-col bg-[#EDEDED]  transition-opacity  left-0 items-center justify-evenly  ${
+            isOpen === true && "translate-x-0 transition-transform duration-500"
           }
-            ${isOpen === false && "hidden"}
+            ${
+              isOpen === false &&
+              "translate-x-[-1000px] transition-transform duration-500 delay-100"
+            }
           } `}
         >
           {/* <li className="hover:before:w-full hover:before:h-2 before:bg-red-400">
