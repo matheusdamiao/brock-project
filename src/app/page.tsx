@@ -4,21 +4,21 @@ import Nav from "@/components/nav";
 import bg from "./../../public/bg.webp";
 import Footer from "@/components/footer";
 import InvestmentsTheses from "@/components/investmentsTheses";
+import EmblaCarousel from "@/components/EmblaCarousel";
+import { EmblaOptionsType } from "embla-carousel";
 
 export default function Home() {
+  const SLIDE_COUNT = 5;
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
   return (
     <main className="w-full flex flex-col bg-white">
       <Nav />
       <section className="w-full h-[80svh] lg:h-[90svh] relative animatedBg flex flex-col items-start justify-center">
         <div className="max-w-7xl w-full m-auto flex items-center flex-col gap-14 px-6 lg:px-0">
           <h1 className="text-xl lg:text-[28px] leading-loose lg:m-auto tracking-[0.2rem] relative text-[#e2e1e1]    text-center lg:w-[70%]">
-            Potencializamos empreendimentos{" "}
-            <p className="relative w-min inline text-center group ">
-              <span>extraordinários</span>
-              {/* <span className="group-hover:w-full w-0 group-hover:h-[20px] opacity-50 bottom-0 absolute left-0  group-hover:block  bg-slate-500 group-hover:transition-all group-hover:duration-200 group-hover:ease-in-out group-hover:delay-300  "></span> */}
-            </p>
-            <span className="font-body font-bold">, </span>disruptivos e
-            pioneiros do futuro
+            Potencializamos o sucesso de empreendimentos de grande potencial
+            para transformar o presente em um futuro de grandes possibilidades
           </h1>
           {/* <h2 className="lg:text-xl font-body font-light text-center lg:w-[60%] m-auto text-[#BCC1D1] ">
             Nosso compromisso é potencializar empresas que resolvam problemas e
@@ -47,14 +47,16 @@ export default function Home() {
           <br /> catalisamos a inovação
         </h3>
         <p className="lg:text-lg text-center text-[#7A7A7A] lg:w-[60%] font-body">
-          Estabelecemos parcerias com empresas maduras, escaláveis, organizadas
-          e com propósitos sólidos e fundamentados. Confiamos na excelência
-          técnica combinada com a audácia de construir o futuro.
+          Estabelecemos parcerias com empresas escaláveis, organizadas e com
+          propósitos sólidos e fundamentados. Confiamos na excelência técnica
+          combinada com a audácia de construir o futuro.
         </p>
 
-        <button className="bg-[#3C5086] mt-[20px] text-[#ffff] text-base border-[#3C5086] border-[1px] font-body px-6 py-4 rounded-[9px]">
+        {/* <button className="bg-[#3C5086] mt-[20px] text-[#ffff] text-base border-[#3C5086] border-[1px] font-body px-6 py-4 rounded-[9px]">
           Conheça a Brock Investimentos
-        </button>
+        </button> */}
+
+        <EmblaCarousel />
       </section>
 
       {/* <span className="block h-[1px] w-[80%] bg-slate-400 m-auto opacity-40"></span> */}
@@ -64,8 +66,8 @@ export default function Home() {
           Excelência para o futuro
         </h3>
         <p className="lg:text-lg text-base text-center text-[#7A7A7A] lg:w-full font-body ">
-          Mantemos padrões de excelência elevados para a escolha de nossos
-          parceiros. <br /> Estes são alguns dos critérios de nossa equipe.
+          Mantemos padrões elevados para a escolha de nossos parceiros. <br />{" "}
+          Estes são alguns dos critérios:
         </p>
       </section>
       <InvestmentsTheses />
