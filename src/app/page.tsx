@@ -40,7 +40,7 @@ export default function Home() {
 
       <section
         id="about"
-        className="px-6 lg:px-0 py-[100px] lg:py-[150px]  flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8"
+        className="px-6 lg:px-0 py-[100px] lg:pt-[150px] lg:pb-[0px]  w-full  flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8"
       >
         <h3 className="lg:text-4xl text-3xl text-center text-[#3C5086] font-body font-bold">
           Juntamos forças com os visionários,
