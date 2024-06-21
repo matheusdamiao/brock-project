@@ -64,6 +64,15 @@ const Form = () => {
           .upload(cleanedFileName, file);
 
         const castedResponse = data as SupabaseUploadResponse;
+        console.log(castedResponse);
+        if(castedResponse.error){
+          toast.update(toastId, {
+            render: "Erro ao fazer upload do seu arquivo!",
+            type: "error",
+            autoClose: 2000,
+            isLoading: false,
+          })
+        }
 
         // console.log("olha a informação aí", castedResponse);
         formData.append(
@@ -73,8 +82,6 @@ const Form = () => {
 
         formData.append("fileName", cleanedFileName);
 
-        // console.log("olha o path todo aí", formData.get("file"));
-        // console.log("olha o nome  aí", formData.get("fileName"));
       }
 
       const res = await fetch("/api/send", {

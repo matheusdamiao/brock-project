@@ -3,7 +3,7 @@ import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import bnex from "./../../public/logos/bnex.svg";
 import zarv from "./../../public/logos/zarv.svg";
 import cubos from "./../../public/logos/cubos.svg";
@@ -20,6 +20,7 @@ import powerbears from "./../../public/logos/powerbears.svg";
 import superopa from "./../../public/logos/superopa.svg";
 
 import Image from "next/image";
+import { useDotButton } from "./EmblaCarouselDotButtons";
 
 const partners = [
   {
@@ -104,17 +105,37 @@ const partners = [
   },
 ];
 
-const OPTIONS: EmblaOptionsType = { loop: true, align: "center" };
+const OPTIONS: EmblaOptionsType = { loop: true };
 
 const EmblaCarousel: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
-    Autoplay({ stopOnInteraction: false }),
-    AutoScroll({ playOnInit: true, stopOnInteraction: false, speed: 1 }),
+    Autoplay({ playOnInit: true, stopOnInteraction: false, delay: 2000 }),
   ]);
 
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+  useDotButton(emblaApi)
+
+  const scrollPrev = useCallback(() => {
+
+    if (!emblaApi) return
+  emblaApi.scrollPrev();
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (!emblaApi) return
+    emblaApi.scrollNext()
+  }, [emblaApi])
+
+
+ 
+
+ 
+
+
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
+    <section className="embla relative">
+      <div className="embla__viewport max-w-7xl" ref={emblaRef}>
         <div className="embla__container">
           {partners.map((v, index) => (
             <div className="embla__slide" key={index}>
@@ -128,6 +149,41 @@ const EmblaCarousel: React.FC = () => {
             </div>
           ))}
         </div>
+       
+        
+       
+      </div>
+
+      <div className="flex items-center justify-center gap-4 absolute bottom-[0px] z-[99999999999999999999]">
+           
+        {scrollSnaps.map((_, index)=>(
+          <div onClick={()=>onDotButtonClick(index)} className={` ${index === selectedIndex ? 'bg-slate-600' : 'bg-gray-300'} h-2 w-2 lg:h-3 lg:w-3 rounded-full cursor-pointer`}  key={index}>
+
+          </div>
+        ))}
+      </div> 
+     
+    
+      <div className="flex z-[888888888] h-[50%] absolute bg-transparent bottom-0 w-full lg:w-[95%] justify-between lg:absolute">
+        <button
+          onClick={scrollPrev}
+          className="bg-[#ECEFF7] rounded-full pr-1 py-4 flex items-center justify-center  w-[60px] h-[60px]"
+        >
+          <Image width={15} height={15} alt="arrow" src="/arrow-icon.svg"   />
+        </button>
+        <button
+          onClick={scrollNext}  
+          className="bg-[#ECEFF7] pl-1 rounded-full w-[60px] h-[60px] flex items-center justify-center"
+        >
+           <Image
+            width={15}
+            height={15}
+            alt="arrow"
+            src="/arrow-icon.svg"
+            className="rotate-180"
+          /> 
+          
+        </button>
       </div>
     </section>
   );

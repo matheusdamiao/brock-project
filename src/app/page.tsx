@@ -17,7 +17,7 @@ export default function Home() {
       <section className="w-full h-[80svh] lg:h-[90svh] relative animatedBg flex flex-col items-start justify-center">
         <div className="max-w-7xl w-full m-auto flex items-center flex-col gap-14 px-6 lg:px-0">
           <h1 className="text-xl lg:text-[28px] leading-loose lg:m-auto tracking-[0.2rem] relative text-[#e2e1e1]    text-center lg:w-[70%]">
-            Potencializamos o sucesso de empreendimentos de grande potencial
+            Fomentamos o sucesso de empreendimentos de grande potencial
             para transformar o presente em um futuro de grandes possibilidades
           </h1>
           {/* <h2 className="lg:text-xl font-body font-light text-center lg:w-[60%] m-auto text-[#BCC1D1] ">
@@ -40,7 +40,7 @@ export default function Home() {
 
       <section
         id="about"
-        className="px-6 lg:px-0 py-[100px] lg:pt-[150px] lg:pb-[0px]  w-full  flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8"
+        className="px-6 lg:px-0 py-[100px] lg:pt-[150px] lg:pb-[0px]  w-full  flex flex-col  m-auto h-full justify-center items-center gap-8"
       >
         <h3 className="lg:text-4xl text-3xl text-center text-[#3C5086] font-body font-bold">
           Juntamos forças com os visionários,
@@ -61,7 +61,7 @@ export default function Home() {
 
       {/* <span className="block h-[1px] w-[80%] bg-slate-400 m-auto opacity-40"></span> */}
 
-      <section className="px-6 lg:px-0 pt-[120px] pb-[50px] lg:pb-[100px] flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8">
+      <section className="px-6 lg:px-0 pt-[200px] pb-[50px] lg:pb-[100px] flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8">
         <h3 className="lg:text-4xl text-3xl text-center text-[#3C5086] font-body font-bold">
           Excelência para o futuro
         </h3>
