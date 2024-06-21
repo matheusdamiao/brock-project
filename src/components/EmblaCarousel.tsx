@@ -18,8 +18,10 @@ import oticaverbem from "./../../public/logos/oticaverbem.png";
 import picme from "./../../public/logos/pic-me.svg";
 import powerbears from "./../../public/logos/powerbears.svg";
 import superopa from "./../../public/logos/superopa.svg";
+import arrow from './../../public/arrow.svg'
 
 import Image from "next/image";
+import { useDotButton } from "./EmblaCarouselDots";
 
 const partners = [
   {
@@ -108,12 +110,13 @@ const OPTIONS: EmblaOptionsType = { loop: true, align: "center" };
 
 const EmblaCarousel: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
-    Autoplay({ stopOnInteraction: false }),
-    AutoScroll({ playOnInit: true, stopOnInteraction: false, speed: 1 }),
+    Autoplay({ stopOnInteraction: false, playOnInit: true, delay: 2000 }),
   ]);
 
+  const {onDotButtonClick, scrollSnaps, selectedIndex} = useDotButton(emblaApi)
+
   return (
-    <section className="embla">
+    <section className="embla relative">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {partners.map((v, index) => (
@@ -122,13 +125,32 @@ const EmblaCarousel: React.FC = () => {
               <p className="text-sm max-w-[400px] text-center text-gray-500 font-body">
                 {v.text}
               </p>
-              <small className="text-center text-gray-900 font-body cursor-pointer hover:underline">
+              <a href={v.link} target="_blank" className="text-center text-gray-900 font-body cursor-pointer hover:underline">
                 {v.link}
-              </small>
+              </a>
             </div>
           ))}
         </div>
       </div>
+
+      <div className="absolute z-[99999999] flex items-center justify-center  gap-4 bottom-0 lg:bottom-10 hover:cursor-pointer">
+          {scrollSnaps.map((_, index)=> 
+            <div key={index} onClick={()=> onDotButtonClick(index)}
+             className={`${index === selectedIndex ? 'bg-gray-500' : 'bg-gray-300'} w-2 h-2 lg:w-3 lg:h-3 rounded-full`}>
+
+            </div>
+          )}
+      </div>
+
+     
+        <button className="absolute left-[-15px] bg-slate-200 w-[50px] h-[50px] flex items-center justify-center rounded-full " onClick={()=> emblaApi?.scrollPrev()}>
+          <Image src={arrow} width={15} height={15} alt='' className="rotate-180 mr-1" />
+        </button>
+        <button className="absolute right-[-15px] bg-slate-200 w-[50px] h-[50px] flex items-center justify-center rounded-full "  onClick={()=> emblaApi?.scrollNext()}>
+        <Image src={arrow} width={15} height={15} alt='' className="ml-2" />
+
+        </button>
+      
     </section>
   );
 };
