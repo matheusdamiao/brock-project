@@ -1,11 +1,10 @@
 "use client";
 import Form from "@/components/form";
 import Nav from "@/components/nav";
-import bg from "./../../public/bg.webp";
 import Footer from "@/components/footer";
 import InvestmentsTheses from "@/components/investmentsTheses";
 import EmblaCarousel from "@/components/EmblaCarousel";
-import { EmblaOptionsType } from "embla-carousel";
+
 
 export default function Home() {
   const SLIDE_COUNT = 5;
