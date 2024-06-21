@@ -1,6 +1,5 @@
 "use client";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
-import AutoScroll from "embla-carousel-auto-scroll";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useCallback, useEffect, useRef } from "react";
