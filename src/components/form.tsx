@@ -224,7 +224,7 @@ const Form = () => {
           />
           {!isDragActive && !file ? (
             <p className="text-[#A7A7A7] text-sm px-6 text-center lg:px-0">
-              Arraste o documento aqui ou faça download
+              Clique aqui para adicionar seu documento
             </p>
           ) : file && file.type == "application/pdf" ? (
             <div className="flex flex-col items-center justify-center">
