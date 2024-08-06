@@ -110,7 +110,7 @@ const OPTIONS: EmblaOptionsType = { loop: true, align: "center" };
 
 const EmblaCarousel: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
-    Autoplay({ stopOnInteraction: false, playOnInit: true, delay: 2000 }),
+    Autoplay({ stopOnInteraction: false, playOnInit: true, delay: 4000 }),
   ]);
 
   const {onDotButtonClick, scrollSnaps, selectedIndex} = useDotButton(emblaApi)
