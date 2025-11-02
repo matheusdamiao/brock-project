@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
   const resendData = await resend.emails.send({
       from: 'Brock Investments  <contato@matheusdamiao.com.br>',
       to: [`${email}`],
-      // bcc:['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
+      bcc:['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
       subject: 'Recebemos sua proposta',
       // react: WelcomeTemplate({ nome: `${name}` }) as React.ReactElement,
       react: WelcomeEmail({name: `${name}`}) as React.ReactElement,
@@ -60,9 +60,8 @@ export async function POST(request: NextRequest) {
 
     const newLeadResponse = await resend.emails.send({
         from: 'Novo Lead do site <contato@matheusdamiao.com.br>',
-        // to: ['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
-        to: ['matheus.damiaoliveira@gmail.com'],
-        // bcc: ['matheus.damiaoliveira@gmail.com', ],
+        to: ['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
+        bcc: ['matheus.damiaoliveira@gmail.com', ],
         subject: 'Novo lead no site',
         // attachments: [ 
         //     {
@@ -93,7 +92,7 @@ export async function POST(request: NextRequest) {
          }
 
          return NextResponse.json(
-        { success: false, message: "Erro ao enviar e-mail de novo lead", details: newLeadResponse.error },
+        { success: false, message: "Erro ao enviar formulário", details: newLeadResponse.error },
         { status: 500 }
       );
       } else{
@@ -106,7 +105,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.log('olha o erro', error);
       return NextResponse.json(
-            { success: true, message: "Erro ao enviar email", details: error },
+            { success: false, message: "Erro ao enviar formulário", details: error },
           { status: 500 }
           );
     

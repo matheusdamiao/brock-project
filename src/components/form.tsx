@@ -28,14 +28,18 @@ const Form = () => {
   const supabase = createClient();
 
   const onDrop = useCallback(
-    (acceptedFiles: React.SetStateAction<File | null>[]) => {
+    (acceptedFiles: File[]) => {
+      if (!acceptedFiles || acceptedFiles.length === 0) {
+        return;
+      }
       console.log(acceptedFiles);
       // TODO: adicionar checagem de tamanho do file
-      if (acceptedFiles[0].size > 28 * 1024 * 1024) {
+      const selected = acceptedFiles[0];
+      if (selected.size > 28 * 1024 * 1024) {
         toast.error("O arquivo não pode ser maior que 28MB");
         return;
       }
-      setFile(acceptedFiles[0]);
+      setFile(selected);
     },
     []
   );
