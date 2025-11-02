@@ -1,10 +1,11 @@
 import { WelcomeTemplate } from "@/components/welcomeTemplate";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { File } from "buffer";
 import { NewLeadTemplate } from "@/components/newLeadTemplate";
 import WelcomeEmail from "@/emails/welcome";
 import NewLead from "@/emails/newLead";
+import { error } from "console";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
   const resendData = await resend.emails.send({
       from: 'Brock Investments  <contato@matheusdamiao.com.br>',
       to: [`${email}`],
-      bcc:['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
+      // bcc:['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
       subject: 'Recebemos sua proposta',
       // react: WelcomeTemplate({ nome: `${name}` }) as React.ReactElement,
       react: WelcomeEmail({name: `${name}`}) as React.ReactElement,
@@ -59,8 +60,9 @@ export async function POST(request: NextRequest) {
 
     const newLeadResponse = await resend.emails.send({
         from: 'Novo Lead do site <contato@matheusdamiao.com.br>',
-        to: ['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
-        bcc: ['matheus.damiaoliveira@gmail.com', ],
+        // to: ['otto.baumgart@grupobaumgart.com.br', 'victor.siqueira@brockinvestimentos.com.br'],
+        to: ['matheus.damiaoliveira@gmail.com'],
+        // bcc: ['matheus.damiaoliveira@gmail.com', ],
         subject: 'Novo lead no site',
         // attachments: [ 
         //     {
@@ -83,12 +85,30 @@ export async function POST(request: NextRequest) {
 
       console.log('new lead data',newLeadResponse);
 
-    return new Response(
-      'Mensagem enviada!'
-    );
+      if(newLeadResponse.error){
+        if(newLeadResponse.error.message == 'Email content and attachment exceeded the size limit (40MB)'){
+            return NextResponse.json(
+            { success: false, message: "Anexo possui mais de 28 mb. Por favor, envie um arquivo menor", details: newLeadResponse.error },
+            { status: 500 })  
+         }
+
+         return NextResponse.json(
+        { success: false, message: "Erro ao enviar e-mail de novo lead", details: newLeadResponse.error },
+        { status: 500 }
+      );
+      } else{
+        return NextResponse.json(
+            { success: true, message: "Mensagem enviada com sucesso!", details: newLeadResponse.data },
+          { status: 200 }
+          );
+      }
+    
   } catch (error) {
     console.log('olha o erro', error);
-    return Response.json({ error });
+      return NextResponse.json(
+            { success: true, message: "Erro ao enviar email", details: error },
+          { status: 500 }
+          );
     
   }
 }

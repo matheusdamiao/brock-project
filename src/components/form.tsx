@@ -30,6 +30,11 @@ const Form = () => {
   const onDrop = useCallback(
     (acceptedFiles: React.SetStateAction<File | null>[]) => {
       console.log(acceptedFiles);
+      // TODO: adicionar checagem de tamanho do file
+      if (acceptedFiles[0].size > 28 * 1024 * 1024) {
+        toast.error("O arquivo não pode ser maior que 28MB");
+        return;
+      }
       setFile(acceptedFiles[0]);
     },
     []
@@ -57,6 +62,7 @@ const Form = () => {
           autoClose: false,
         });
 
+        console.log('olha o file', file)
         const cleanedFileName = String(new Date().getTime()) + removeDiacritics(file.name)
         const bucket = "brock/propostas";
         const data = await supabase.storage
@@ -94,19 +100,50 @@ const Form = () => {
         method: "POST",
         body: formData,
       });
+      const resposta = await res.json();
+       console.log('res da API', resposta)
+      if(!resposta.success) {
 
-      setIsLoading(false);
+         toast.update(toastId, {
+            render: resposta.message,
+            type: "error",
+            autoClose: 2000,
+            isLoading: false,
+          })
+           setIsLoading(false);
+           setIsSent(false);
+          return 
+      } 
+
+
 
       toast.update(toastId, {
-        render: "Arquivo carregado!",
-        type: "success",
-        autoClose: 1000,
-        isLoading: false,
+          render: "Arquivo carregado!",
+          type: "success",
+          autoClose: 1000,
+          isLoading: false,
       });
 
-      toast.success("Mensagem enviada! Obrigado!", {
-        autoClose: 4000,
-      });
+      toast.success('Mensagem enviada com sucesso!', {
+        autoClose: 3000
+      })
+
+      setIsLoading(false);
+      
+     
+
+      
+
+      // toast.update(toastId, {
+      //   render: "Arquivo carregado!",
+      //   type: "success",
+      //   autoClose: 1000,
+      //   isLoading: false,
+      // });
+
+      // toast.success("Mensagem enviada! Obrigado!", {
+      //   autoClose: 4000,
+      // });
 
       setIsSent(true);
       setName("");
