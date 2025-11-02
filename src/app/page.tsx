@@ -16,7 +16,10 @@ export default function Home() {
       <section className="w-full h-[80svh] lg:h-[90svh] relative animatedBg flex flex-col items-start justify-center">
         <div className="max-w-7xl w-full m-auto flex items-center flex-col gap-14 px-6 lg:px-0">
           <h1 className="text-xl lg:text-[28px] leading-loose lg:m-auto tracking-[0.2rem] relative text-[#e2e1e1]    text-center lg:w-[70%]">
-          Fomentamos o sucesso de negócios e empreendedores de grande potencial<span className="font-body text-4xl font-bold">,</span> focados em transformar o presente em um futuro de grandes possibilidades
+
+            Investimos em negócios promissores<span className="font-body text-4xl font-bold">, </span> empreendedores diferenciados e com grande potencial<span className="font-body text-4xl font-bold">, </span>
+             aliando talento a solucionamento de problemas<span className="font-body text-4xl font-bold">.</span>
+          {/* Fomentamos o sucesso de negócios e empreendedores de grande potencial<span className="font-body text-4xl font-bold">,</span> focados em transformar o presente em um futuro de grandes possibilidades */}
           </h1>
           {/* <h2 className="lg:text-xl font-body font-light text-center lg:w-[60%] m-auto text-[#BCC1D1] ">
             Nosso compromisso é potencializar empresas que resolvam problemas e
@@ -41,7 +44,7 @@ export default function Home() {
         className="px-6 lg:px-0 py-[100px] lg:pt-[150px] lg:pb-[0px]  w-full  flex flex-col max-w-7xl m-auto h-full justify-center items-center gap-8"
       >
         <h3 className="lg:text-4xl text-3xl text-center text-[#3C5086] font-body font-bold">
-          Juntamos forças com os visionários,
+          Juntamos forças com os empreendedores,
           <br /> catalisamos a inovação
         </h3>
         <p className="lg:text-lg text-center text-[#7A7A7A] lg:w-[60%] font-body">

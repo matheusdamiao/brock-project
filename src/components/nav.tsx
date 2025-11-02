@@ -57,7 +57,7 @@ const Nav = () => {
           }
             ${
               isOpen === false &&
-              "translate-x-[-1000px] transition-transform duration-500 delay-100"
+              "translate-x-[-2000px] transition-transform duration-500 delay-100"
             }
           } `}
         >

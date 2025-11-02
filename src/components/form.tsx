@@ -42,9 +42,9 @@ const Form = () => {
     try {
       setIsLoading(true);
 
-      toast.success("Preparando o envio...", {
-        autoClose: 1500,
-      });
+      // toast.success("Preparando o envio...", {
+      //   autoClose: 1500,
+      // });
 
       const formData = new FormData();
       formData.append("name", name);
@@ -57,13 +57,26 @@ const Form = () => {
           autoClose: false,
         });
 
-        const cleanedFileName = removeDiacritics(file.name);
+        const cleanedFileName = String(new Date().getTime()) + removeDiacritics(file.name)
         const bucket = "brock/propostas";
         const data = await supabase.storage
           .from(bucket)
           .upload(cleanedFileName, file);
 
         const castedResponse = data as SupabaseUploadResponse;
+
+        if(castedResponse.error) {
+          console.log('erro:', castedResponse.error)
+          toast.update(toastId, {
+            render: "Erro ao carregar arquivo. Tente novamente",
+            type: "error",
+            autoClose: 2000,
+            isLoading: false,
+          })
+           setIsLoading(false);
+           setIsSent(false);
+          return
+        }
 
         // console.log("olha a informação aí", castedResponse);
         formData.append(
@@ -87,12 +100,12 @@ const Form = () => {
       toast.update(toastId, {
         render: "Arquivo carregado!",
         type: "success",
-        autoClose: 2000,
+        autoClose: 1000,
         isLoading: false,
       });
 
       toast.success("Mensagem enviada! Obrigado!", {
-        autoClose: 3000,
+        autoClose: 4000,
       });
 
       setIsSent(true);
