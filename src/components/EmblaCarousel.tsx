@@ -64,8 +64,8 @@ const partners = [
   },
 
   {
-    text: "“Transformamos desperdício em economia para todos. Mais 1 milhão de quilos de alimentos salvos.”",
-    link: "https://superopa.com/",
+    text: "“Conectando o distribuidor ao varejo de alimentos de forma inteligente, simplificamos todo o processo de compra e venda.”",
+    link: "https://b2b.superopa.com/#/",
     logo: superopa,
   },
 
