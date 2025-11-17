@@ -197,7 +197,7 @@ const Form = () => {
         {" "}
         <h4 className="text-[#7A7A7A] pt-6 lg:pb-16 pb-10 text-center font-body lg:text-lg text-base">
           {" "}
-          Se está buscando investimento para um negócio que tem o perfil que queremos, você pode nos enviar uma apresentação, preenchendo seus dados no espaço a seguir
+          Se está buscando investimento para um negócio que tem o perfil que queremos, você pode nos enviar uma apresentação, preenchendo seus dados no espaço a seguir:
         </h4>
         <div className="flex gap-4 items-start lg:flex-nowrap flex-wrap flex-col lg:flex-row">
           <p className="relative float-label-input !m-0 w-full lg:max-w-[200px] ">
